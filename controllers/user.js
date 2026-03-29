@@ -24,7 +24,6 @@ async function handleLogin(req, res) {
         const user = await User.matchPassword(body.email, body.password);
         // console.log("user", user);
 
-        // Create token and store it (single session per user)
         const token = await createAndStoreToken(user);
 
         res.status(200).json({ message: 'User logged in successfully', user, token });

@@ -26,7 +26,7 @@ async function handleLogin(req, res) {
 
         const token = await createAndStoreToken(user);
 
-        res.status(200).json({ message: 'User logged in successfully', user, token });
+        res.status(200).json({ message: 'User logged in successfully', token });
     } catch (error) {
         console.error('Error logging in user:', error);
         res.status(401).json({ message: 'Invalid email or password', error: error.message });

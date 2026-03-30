@@ -6,13 +6,12 @@ async function checkForAuthentication(req, res, next) {
     if (token && token.startsWith('Bearer ')) {
         token = token.slice(7);
     }
-    console.log('Received token:', token);
+    // console.log('Received token:', token);
     const user = verifyToken(token);
     if (!user) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
     
-    // Verify token exists in database and is active
     const isTokenValid = await verifyTokenInDatabase(user._id, token);
     if (!isTokenValid) {
         return res.status(401).json({ message: 'Token has been invalidated. Please login again.' });

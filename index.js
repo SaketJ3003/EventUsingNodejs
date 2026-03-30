@@ -1,11 +1,10 @@
 const express = require('express'); 
 const path = require('path');
-const mongoose = require('mongoose');
 const { connectToMongoDB } = require('./connect');
 const eventRoute  = require('./routes/eventDetails');
 const userRoute = require('./routes/user');
 const { checkForAuthentication, checkForAdmin } = require('./middlewares/auth');
-
+const bookingRoute = require('./routes/booking');
 
 const app = express();
 const PORT = 8000;
@@ -23,6 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api',checkForAuthentication, checkForAdmin, eventRoute);
 app.use('/user', userRoute);
+
+app.use('/event', eventRoute);
+
+// route to book ticket for an event
+app.use('/book-ticket', checkForAuthentication, bookingRoute);
+
+
 
 
 app.listen(PORT, () => {

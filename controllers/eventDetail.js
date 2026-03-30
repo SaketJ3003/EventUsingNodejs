@@ -1,7 +1,6 @@
 const Category = require('../models/categories');
 const Tag = require('../models/tags');
 const Event = require('../models/event');
-const User = require('../models/user');
 
 async function handleCategory(req, res) {
     const body = req.body;
